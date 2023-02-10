@@ -27,6 +27,11 @@ function moveBall(){
         // console.log ("any")
         }    
     }
+    if (ballLeft < lpaddleRight){
+       if (ballRect.bottom < lpaddleRect.top){
+        direction = direction * -1
+       }
+    }
     if (ballRight <= fieldRight && ballLeft >= fieldLeft){
         x += direction
         ball.style.left = x + "px";
@@ -42,7 +47,10 @@ function moveBall(){
         x += direction;
         ball.style.left = x + "px"
     }
-
+document.addEventListener("resize",reBuildFeild)
+function reBuildFeild (){
+    field.style.height = window.top.style.height
+}
 
     window.requestAnimationFrame(moveBall)
 }
