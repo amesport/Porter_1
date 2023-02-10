@@ -5,49 +5,46 @@ function moveBall(){
     const ball = document.getElementById("ball");
     // console.log(ball);
     const lpaddle = document.getElementById("lpaddle");
-    const lpaddlePos = lpaddle.getBoundingClientRect();
-    const lpaddleRight = lpaddlePos.right
-    const lpaddleBottom = lpaddlePos.bottom
-    const newlpaddleRight = lpaddle +1
+    const lpaddleRect = lpaddle.getBoundingClientRect();
+    const lpaddleRight = lpaddleRect.right
     lpaddle.style.right = lpaddleRight + "px"
-    const rpaddle =  document.getElemntById("rpaddle");
-    const rpaddlePos = rpaddle.getBoundingClientRect();
-    const rpaddleLeft = rpaddlePos.left
-    const rpaddleBottom = rpaddlePos.bottom
-    rpaddle.syle.top = rpaddleTop + "px"
-    const ballPos = ball.getBoundingClientRect();
-    const ballLeft = ballPos.left
-    const ballRight = ballPos.right
+    const rpaddle =  document.getElementById("rpaddle");
+    const rpaddleRect = rpaddle.getBoundingClientRect();
+    const ballRect = ball.getBoundingClientRect();
+    const ballLeft = ballRect.left
+    const ballRight = ballRect.right
     const field = document.getElementById("field");
     const fieldRect = field.getBoundingClientRect();
     const fieldLeft = fieldRect.left
     const fieldRight = fieldRect.right
-    const fieldTop = fieldRect.top
-    const fieldBottom = fieldRect.bottom
     const newBallLeft = ballLeft +1
     ball.style.left = newBallLeft + "px"
     //console.log(ballPos);
     //console.log(ballLeft);
-if (ballRight <= fieldRight && ballLeft >= fieldLeft){
-    x += direction
-    ball.style.left = x + "px";
-}
-if (ballLeft < lpaddleRight){
-    direction = direction * -1
-    console.log ("any")
-}
- if (ballLeft <fieldLeft){
-    direction = direction * -1
-    x += direction;
-    ball.style.left = x + "px";
-}
-if (ballRight > fieldRight) {
-    direction = direction *-1;
-    x += direction;
-    ball.style.left = x + "px"
-}
+    if (ballLeft < lpaddleRight){
+        if (ballRect.top < lpaddleRect.bottom){
+        direction = direction * -1
+        // console.log ("any")
+        }    
+    }
+    if (ballRight <= fieldRight && ballLeft >= fieldLeft){
+        x += direction
+        ball.style.left = x + "px";
+    }
+    if (ballLeft <fieldLeft){
+        direction = direction * -1
+        x += direction;
+        ball.style.left = x + "px";
+
+    }
+    if (ballRight > fieldRight) {
+        direction = direction *-1;
+        x += direction;
+        ball.style.left = x + "px"
+    }
 
 
     window.requestAnimationFrame(moveBall)
-}moveBall();
+}
+moveBall();
 
