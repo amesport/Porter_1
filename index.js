@@ -11,10 +11,14 @@ function moveBall(){
     const rpaddle =  document.getElementById("rpaddle");
     const rpaddleRect = rpaddle.getBoundingClientRect();
     const ballRect = ball.getBoundingClientRect();
+    const ballTop = ballRect.top
+    const ballBottom = ballRect.bottom
     const ballLeft = ballRect.left
     const ballRight = ballRect.right
     const field = document.getElementById("field");
     const fieldRect = field.getBoundingClientRect();
+    const fieldTop = fieldRect.top
+    const fieldBottom = fieldRect.bottom
     const fieldLeft = fieldRect.left
     const fieldRight = fieldRect.right
     const newBallLeft = ballLeft +1
@@ -36,16 +40,29 @@ function moveBall(){
         x += direction
         ball.style.left = x + "px";
     }
+    else  if ( ballTop <= fieldTop && ballBottom >= fieldBottom){
+        y += direction
+        ball.style.top + y + "px";
+    }
     if (ballLeft <fieldLeft){
         direction = direction * -1
         x += direction;
         ball.style.left = x + "px";
-
     }
     if (ballRight > fieldRight) {
         direction = direction *-1;
         x += direction;
-        ball.style.left = x + "px"
+        ball.style.left = x + "px";
+    }
+    if (ballTop < fieldTop){
+        direction = direction * -1;
+        y += direction;
+        ball.style.top = y + "px";
+    }
+    if (ballBottom > fieldBottom){
+        direction = direction * -1
+        y += direction;
+        ball.style.bottom = y + "px";
     }
 document.addEventListener("resize",reBuildFeild)
 function reBuildFeild (){
