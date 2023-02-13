@@ -1,5 +1,7 @@
 var x = 10
-var direction = 5
+var direction = 2
+var y = 10
+var direction = 2
 
 function moveBall(){
     const ball = document.getElementById("ball");
@@ -40,31 +42,31 @@ function moveBall(){
     }
     if (ballRight <= fieldRight && ballLeft >= fieldLeft){
         x += direction
-        ball.style.left = x + "px";
+        ball.style.left = `${x}px`;
     }
     else  if ( ballTop <= fieldTop && ballBottom >= fieldBottom){
         y += direction
-        ball.style.top + y + "px";
+        ball.style.top = `${y}px`;
     }
     if (ballLeft <fieldLeft){
         direction = direction * -1
         x += direction;
-        ball.style.left = x + "px";
+        ball.style.left = `${x}px`;
     }
     if (ballRight > fieldRight) {
         direction = direction *-1;
         x += direction;
-        ball.style.left = x + "px";
+        ball.style.left = `${x}px`;
     }
-    if (ballTop < fieldTop){
-        direction = direction * -1;
+    else if (ballTop < fieldTop){
+        direction = direction / -1;
         y += direction;
-        ball.style.top = y + "px";
+        ball.style.top = `${y}px`;
     }
     if (ballBottom > fieldBottom){
-        direction = direction * -1
+        direction = direction / -1
         y += direction;
-        ball.style.bottom = y + "px";
+        ball.style.bottom = `${y}px`;
     }
 document.addEventListener("resize",reBuildFeild)
 function reBuildFeild (){
