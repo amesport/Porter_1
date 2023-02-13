@@ -10,6 +10,8 @@ function moveBall(){
     lpaddle.style.right = lpaddleRight + "px"
     const rpaddle =  document.getElementById("rpaddle");
     const rpaddleRect = rpaddle.getBoundingClientRect();
+    const rpaddleLeft = rpaddleRect.left
+    rpaddle.style.left = rpaddleLeft + "px"
     const ballRect = ball.getBoundingClientRect();
     const ballTop = ballRect.top
     const ballBottom = ballRect.bottom
@@ -31,8 +33,8 @@ function moveBall(){
         // console.log ("any")
         }    
     }
-    if (ballLeft < lpaddleRight){
-       if (ballRect.bottom < lpaddleRect.top){
+    if (ballRight > rpaddleLeft){
+       if (ballRect.bottom = rpaddleRect.top){
         direction = direction * -1
        }
     }
