@@ -1,80 +1,89 @@
-var x = 10
-var direction = 2
-var y = 10
-var direction = 2
+x = 100
+y = 100
+maxSpeed = 10
+
+    var ball = document.getElementById("ball");
+    // console.log(ball);
+    var lpaddle = document.getElementById("lpaddle");
+    var lpaddleRect = lpaddle.getBoundingClientRect();
+    var lpaddleRight = lpaddleRect.right
+    // lpaddle.style.right = lpaddleRight + "px"
+    var rpaddle =  document.getElementById("rpaddle");
+    var rpaddleRect = rpaddle.getBoundingClientRect();
+    var rpaddleLeft = rpaddleRect.left
+    // rpaddle.style.left = rpaddleLeft + "px"
+    var ballRect = ball.getBoundingClientRect();
+    var ballTop = ballRect.top
+    var ballBottom = ballRect.bottom
+    var ballLeft = ballRect.left
+    var ballRight = ballRect.right
+    var field = document.getElementById("field");
+    var fieldRect = field.getBoundingClientRect();
+    var fieldTop = fieldRect.top
+    var fieldBottom = fieldRect.bottom
+    var fieldLeft = fieldRect.left
+    var fieldRight = fieldRect.right
+
+function randVector(){
+    var xDir = Math.round(Math.random() * maxSpeed - maxSpeed/ 2)
+    var yDir = Math.round(Math.random() * maxSpeed - maxSpeed/ 2)
+    while (xDir === 0){
+        xDir = Math.round(Math.random() * maxSpeed - maxSpeed/ 2)
+    }
+    while (yDir === 0){
+        yDir = Math.round(Math.random() * maxSpeed - maxSpeed/ 2)
+    }
+    return {xDir, yDir}
+}
+const direction = randVector()
+console.log(direction)
+
+document.addEventListener("resize", reBuildFeild())
+document.addEventListener("load", reBuildFeild())
+
+function reBuildFeild (){
+    field.height = window.innerHeight
+    field.width = window.innerWidth
+    ballLeft = "10px"
+    ballTop = "10px"
+    console.log("doslkf")
+    moveBall();
+}
 
 function moveBall(){
-    const ball = document.getElementById("ball");
-    // console.log(ball);
-    const lpaddle = document.getElementById("lpaddle");
-    const lpaddleRect = lpaddle.getBoundingClientRect();
-    const lpaddleRight = lpaddleRect.right
-    lpaddle.style.right = lpaddleRight + "px"
-    const rpaddle =  document.getElementById("rpaddle");
-    const rpaddleRect = rpaddle.getBoundingClientRect();
-    const rpaddleLeft = rpaddleRect.left
-    rpaddle.style.left = rpaddleLeft + "px"
-    const ballRect = ball.getBoundingClientRect();
-    const ballTop = ballRect.top
-    const ballBottom = ballRect.bottom
-    const ballLeft = ballRect.left
-    const ballRight = ballRect.right
-    const field = document.getElementById("field");
-    const fieldRect = field.getBoundingClientRect();
-    const fieldTop = fieldRect.top
-    const fieldBottom = fieldRect.bottom
-    const fieldLeft = fieldRect.left
-    const fieldRight = fieldRect.right
-    const newBallLeft = ballLeft +1
-    ball.style.left = newBallLeft + "px"
+
+    // const newBallLeft = ballLeft +1
+    // ball.style.left = newBallLeft + "px"
     //console.log(ballPos);
     //console.log(ballLeft);
-    if (ballLeft < lpaddleRight){
-        if (ballRect.top < lpaddleRect.bottom){
-        direction = direction * -1
-        // console.log ("any")
-        }    
-    }
-    if (ballRight > rpaddleLeft){
-       if (ballRect.bottom = rpaddleRect.top){
-        direction = direction * -1
-       }
-    }
-    if (ballRight <= fieldRight && ballLeft >= fieldLeft){
-        x += direction
+    // if (ballLeft < lpaddleRight){
+    //     if (ballRect.top < lpaddleRect.bottom){
+    //     direction.xDir = direction.xDir * -1
+    //     // console.log ("any")
+    //     }    
+    // }
+    // if (ballRight > rpaddleLeft){
+    //    if (ballRect.bottom > rpaddleRect.top && ballRect.top <rpaddleRect.bottom){
+    //     direction.xDir = direction.xDir * -1
+    //    }
+    // }
+    if (ballRight < fieldRight && ballLeft > fieldLeft){
+        x += direction.xDir
+        ball.style.left = `${x}px`;
+    }else{
+        direction.xDir = direction.xDir * -1;
+        x += direction.xDir;
         ball.style.left = `${x}px`;
     }
-    else  if ( ballTop <= fieldTop && ballBottom >= fieldBottom){
-        y += direction
+    if ( ballTop > fieldTop && ballBottom < fieldBottom){
+        y += direction.yDir
+        ball.style.top = `${y}px`;
+    }else{
+        direction.yDir*= -1
+        y += direction.yDir
         ball.style.top = `${y}px`;
     }
-    if (ballLeft <fieldLeft){
-        direction = direction * -1
-        x += direction;
-        ball.style.left = `${x}px`;
-    }
-    if (ballRight > fieldRight) {
-        direction = direction *-1;
-        x += direction;
-        ball.style.left = `${x}px`;
-    }
-    else if (ballTop < fieldTop){
-        direction = direction / -1;
-        y += direction;
-        ball.style.top = `${y}px`;
-    }
-    if (ballBottom > fieldBottom){
-        direction = direction / -1
-        y += direction;
-        ball.style.bottom = `${y}px`;
-    }
-document.addEventListener("resize",reBuildFeild)
-function reBuildFeild (){
-    field.style.height = window.top.style.height
-}
-
     window.requestAnimationFrame(moveBall)
 }
-moveBall();
 
-https://prod.liveshare.vsengsaas.visualstudio.com/join?4890655C902F08B5029D5C87528B0AE53181
+
